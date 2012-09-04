@@ -224,7 +224,8 @@ void GMVideoOutputManager::set_frame_data (const char* data,
   if ((local_display_info.mode == Ekiga::VO_MODE_LOCAL) && !local)
       return;
 
-  if ((local_display_info.mode == Ekiga::VO_MODE_REMOTE) && local)
+  if ((local_display_info.mode == Ekiga::VO_MODE_REMOTE ||
+       local_display_info.mode == Ekiga::VO_MODE_REMOTE_EXT) && local)
       return;
 
   run_thread.Signal();
@@ -309,6 +310,7 @@ GMVideoOutputManager::frame_display_change_needed ()
                          last_frame.remote_height != current_frame.remote_height);
   bool window_changed = (local_display_info.x != last_frame.embedded_x ||
                         local_display_info.y != last_frame.embedded_y);
+
   switch (current_frame.mode) {
   case Ekiga::VO_MODE_LOCAL:
     return ( local_changed || window_changed );
@@ -327,6 +329,7 @@ GMVideoOutputManager::frame_display_change_needed ()
     return ( remote_changed || local_changed );
     break;
 
+  case Ekiga::VO_MODE_REMOTE_EXT: // no need to handle this
   case Ekiga::VO_MODE_UNSET:
   default:
     break;
@@ -366,6 +369,7 @@ GMVideoOutputManager::redraw ()
             display_pip_frames ((char*)lframeStore.GetPointer (), current_frame.local_width, current_frame.local_height,
                               (char*)rframeStore.GetPointer (), current_frame.remote_width, current_frame.remote_height);
        break;
+    case Ekiga::VO_MODE_REMOTE_EXT: // no need to handle this
     case Ekiga::VO_MODE_UNSET:
     default:
        break;
