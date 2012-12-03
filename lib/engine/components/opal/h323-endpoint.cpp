@@ -291,6 +291,20 @@ Opal::H323::EndPoint::unsubscribe (const Opal::Account & account,
 
 
 void
+Opal::H323::EndPoint::OnRegistrationConfirm ()
+{
+  PTRACE(4, "H.323 registration successful.");
+}
+
+
+void
+Opal::H323::EndPoint::OnRegistrationReject ()
+{
+  PTRACE(4, "H.323 registration rejected.");
+}
+
+
+void
 Opal::H323::EndPoint::Register (const Opal::Account& account)
 {
   std::string info;

@@ -112,6 +112,9 @@ namespace Opal {
                                  unsigned options,
                                  OpalConnection::StringOptions *str_options);
 
+      void OnRegistrationConfirm ();
+      void OnRegistrationReject ();
+
       void on_dial (std::string uri);
 
       void on_transfer (std::string uri);
