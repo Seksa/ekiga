@@ -399,7 +399,7 @@ bool
 Opal::H323::EndPoint::RemoveGatekeeper (const PString & address)
 {
   if (IsRegisteredWithGatekeeper (address))
-    return H323EndPoint::RemoveGatekeeper (0);
+    return H323EndPoint::RemoveGatekeeper ();
 
   return FALSE;
 }
