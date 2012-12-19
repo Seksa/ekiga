@@ -311,7 +311,7 @@ Opal::H323::EndPoint::Register (const Opal::Account& account)
 
   if (account.is_enabled () && !IsRegisteredWithGatekeeper (account.get_host ())) {
 
-    H323EndPoint::RemoveGatekeeper (0);
+    RemoveGatekeeper (account.get_host ());
 
     if (!account.get_username ().empty ()) {
       SetLocalUserName (account.get_username ());
