@@ -315,7 +315,10 @@ Opal::H323::EndPoint::Register (const Opal::Account& account)
 
     if (!account.get_username ().empty ()) {
       SetLocalUserName (account.get_username ());
-      AddAliasName (manager.GetDefaultDisplayName ());
+
+      PStringList aliases = GetAliasNames();
+      if (aliases.GetStringsIndex(manager.GetDefaultDisplayName ()) == P_MAX_INDEX)
+        AddAliasName (manager.GetDefaultDisplayName ());
     }
 
     SetGatekeeperPassword (account.get_password (), account.get_username ());
